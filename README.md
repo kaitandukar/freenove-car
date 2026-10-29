@@ -1,23 +1,30 @@
-# Freenove Mecanum wheels — MicroPython port (in progress)
+# Freenove Mecanum Car — MicroPython examples
 
-Target: Raspberry Pi Pico/Pico W, MicroPython firmware. This is **not yet a complete 1:1 conversion** of the Arduino Sketches folder. All included examples are untested on physical hardware.
+Each example is in its own folder. Every folder contains:
+- `main.py` — the example program
+- `freenove_car.py` — the required hardware driver
 
-## Install
+## Upload using Thonny (Lubuntu)
+1. Connect the Pico and choose **MicroPython (Raspberry Pi Pico)** in Thonny.
+2. Open the folder of the example you want.
+3. Upload **both files** from that folder to the **root** of the Pico (not into a subfolder).
+   In Thonny, enable **View → Files**, then right-click each file on your
+   computer and choose **Upload to /**. Alternatively use **File → Save as →
+   Raspberry Pi Pico** for each file.
+4. The Pico should show `/main.py` and `/freenove_car.py`.
+5. Click **Run** (F5). On subsequent boots, `main.py` runs automatically.
 
-1. Flash MicroPython on your Pico/Pico W and open Thonny.
-2. Copy `freenove_car.py` to the Pico root.
-3. Open one file from `examples/` in Thonny and run it on the Pico.
-4. Test with wheels lifted off the floor first. Use Stop in Thonny to halt a running example.
+## Changing example
+Stop the current program in Thonny. Upload the two files from a DIFFERENT
+example folder to the Pico root, replacing the existing `main.py` and
+`freenove_car.py`. Only one example is installed as `/main.py` at a time.
 
-## Included
+## Safety and status
+**Raise the wheels off the ground before running a driving example.**
+These files are adaptations from the previous expanded package and have
+NOT been hardware-tested. Obstacle avoidance, line following, and light
+following are simplified adaptations; battery measurement needs calibration.
+The LED matrix, RGB LEDs, infrared remote, Wi-Fi app protocol and
+multifunction sketches have not been converted yet.
 
-Motor movement, servo, buzzer, battery ADC, ultrasonic distance and avoidance, light sensors/light-following, and line sensors/line-following.
-
-## Limitations
-
-- Light-following, line-following and obstacle avoidance are simplified adaptations, **not exact translations** of Freenove's algorithms; tune on your hardware.
-- Battery voltage coefficient is an estimate; calibrate before using it to determine battery safety.
-- Matrix display (VK16K33), WS2812 LEDs, infrared remote (NEC decoding), Wi-Fi app protocol, and both multifunction-car sketches remain **unconverted**.
-- GPIO mapping is from Freenove's Mecanum source: motors 18/19,21/20,7/6,9/8; servo 13; buzzer 2; ultrasonic 4/5; battery 26; light 28/27; tracking 12/11/10.
-- Do not power motors directly from Pico GPIO. Use the original motor driver board.
-- The original C++ uses custom libraries and some examples require extra modules. The conversion does not implement those modules yet.
+GPIO mappings and behavior follow the original expanded package.
